@@ -31,6 +31,7 @@ func CrawlWebsite(url string, metadata, noCopyToLocal bool, wg *sync.WaitGroup) 
 		return
 	}
 	if metadata {
+		// Build a dataReader from file
 		file, err := os.ReadFile(folderName + fileName)
 		if err != nil {
 			fmt.Printf("Metadata for URL [%v] not found, you need to fetch the webpage first\n", url)
@@ -38,12 +39,13 @@ func CrawlWebsite(url string, metadata, noCopyToLocal bool, wg *sync.WaitGroup) 
 		}
 		dataReader = bytes.NewReader(file)
 	} else {
+		// Build a dataReader from http request
 		resp, err := http.Get(url)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
-		// defer resp.Body.Close()
+		defer resp.Body.Close()
 		dataReader = resp.Body
 	}
 
