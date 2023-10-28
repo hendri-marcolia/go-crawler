@@ -37,7 +37,7 @@ func CssParser(doc *goquery.Document, host, folderPath string) func(int, *goquer
 				if err := util.DownloadFile(hrefAttr, cssPath+(strings.Split(cssName, "?")[0])); err != nil {
 					fmt.Println(err)
 				}
-				s.SetAttr("href", cssPath+cssName)
+				s.SetAttr("href", "./style"+cssName)
 			}
 		}
 	}

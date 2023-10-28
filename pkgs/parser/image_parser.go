@@ -39,7 +39,7 @@ func ImageParser(doc *goquery.Document, host, folderPath string) func(int, *goqu
 				imagePath := filepath.Join(folderPath, "img")
 				os.MkdirAll(imagePath, 0755)
 				util.DownloadFile(srcAttr, imagePath+imageName)
-				s.SetAttr("src", imagePath+imageName)
+				s.SetAttr("src", "./img"+imageName)
 			}
 			if setExists {
 				// TODO: Handler for srcset

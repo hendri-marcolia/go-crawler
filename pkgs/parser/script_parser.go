@@ -27,14 +27,14 @@ func ScriptParser(doc *goquery.Document, host, folderPath string) func(int, *goq
 				if NoCopyToLocal {
 					return
 				}
-				cssName := attr[strings.LastIndex(attr, "/"):]
-				cssPath := filepath.Join(folderPath, "script")
-				os.MkdirAll(cssPath, 0755)
+				scName := attr[strings.LastIndex(attr, "/"):]
+				scPath := filepath.Join(folderPath, "script")
+				os.MkdirAll(scPath, 0755)
 				// For JS it has suffix like ?ver which not allowed by the filesystem format
-				if err := util.DownloadFile(attr, cssPath+(strings.Split(cssName, "?")[0])); err != nil {
+				if err := util.DownloadFile(attr, scPath+(strings.Split(scName, "?")[0])); err != nil {
 					fmt.Println(err)
 				}
-				s.SetAttr("src", cssPath+cssName)
+				s.SetAttr("src", "./script"+scName)
 			}
 		}
 	}
